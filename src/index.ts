@@ -19,9 +19,10 @@ program
 program
   .command("statement")
   .description("Prints out a plain-text statement for the customer")
-  .action(() => console.log(statement(customer, movies)))
-  .command("hmtl-statement")
-  .description("Prints out an html statement for the customer")
-  .action(() => console.log(htmlStatement(customer, movies)));
+  .option("-h, --html", 'flag that determines whether to output in html or plaintext')
+  .action((options) => {
+    const printString = options.html ? htmlStatement(customer, movies) : statement(customer, movies);
+    console.log(printString);
+  });
 
 program.parse(process.argv);

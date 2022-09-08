@@ -26,7 +26,7 @@ export const htmlStatement = (customer: Customer, movies: MovieCollection): stri
 
   let movieAndAmounts = calculateMoviePrice(customer, movies);
   for (const title in movieAndAmounts.movies) {
-    result += `\t<li>${title}\t${movieAndAmounts.movies[title]}</li>\n`
+    result += `\t<li>${title} - ${movieAndAmounts.movies[title]}</li>\n`
   }
   
   result += `</ul>\n<p>Amount owed is <em>${movieAndAmounts.totalAmountDue}</em></p>\n`;
@@ -63,6 +63,7 @@ const calculateMoviePrice = (customer: Customer, movies: MovieCollection): Movie
         }
         break;
     }
+    
     movieAndAmounts.movies[movie.title] = thisAmount;
     movieAndAmounts.frequentRenterPoints++;
     if (movie.code === MovieCode.NEW && r.days > 2) movieAndAmounts.frequentRenterPoints++;
