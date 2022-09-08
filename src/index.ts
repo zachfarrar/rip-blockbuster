@@ -4,9 +4,9 @@ import { Customer } from "./Customer";
 import { MovieCollection } from "./Movie";
 
 import { Command } from "commander";
-import { statement } from "./statement";
+import { htmlStatement, statement } from "./statement";
 
-const program: Command = require("commander");
+const program: Command = new Command();
 const version: string = require("../package.json").version;
 
 const customer: Customer = require("./data/customer.json");
@@ -19,6 +19,9 @@ program
 program
   .command("statement")
   .description("Prints out a plain-text statement for the customer")
-  .action(() => console.log(statement(customer, movies)));
+  .action(() => console.log(statement(customer, movies)))
+  .command("hmtl-statement")
+  .description("Prints out an html statement for the customer")
+  .action(() => console.log(htmlStatement(customer, movies)));
 
 program.parse(process.argv);

@@ -1,10 +1,48 @@
-import { MovieCode } from "./Movie";
+import { Customer } from "./Customer";
+import { MovieCode, MovieCollection } from "./Movie";
 
-export const statement = (customer: any, movies: any): string => {
-  let totalAmount = 0;
-  let frequentRenterPoints = 0;
+type MoviesAndAmounts = {
+  movies: {[idx: string]: number};
+  frequentRenterPoints: number;
+  totalAmountDue: number;
+};
+
+export const statement = (customer: Customer, movies: MovieCollection): string => {
   let result = `Rental Record for ${customer.name}\n`;
-  for (let r of customer.rentals) {
+
+  let movieAndAmounts = calculateMoviePrice(customer, movies);
+  for (const title in movieAndAmounts.movies) {
+    result += `\t${title}\t${movieAndAmounts.movies[title]}\n`
+  }
+  
+  result += `Amount owed is ${movieAndAmounts.totalAmountDue}\n`;
+  result += `You earned ${movieAndAmounts.frequentRenterPoints} frequent renter points\n`;
+
+  return result;
+};
+
+export const htmlStatement = (customer: Customer, movies: MovieCollection): string => {
+  let result = `<h1>Rental Record for <em>${customer.name}</em></h1>\n<ul>\n`;
+
+  let movieAndAmounts = calculateMoviePrice(customer, movies);
+  for (const title in movieAndAmounts.movies) {
+    result += `\t<li>${title}\t${movieAndAmounts.movies[title]}</li>\n`
+  }
+  
+  result += `</ul>\n<p>Amount owed is <em>${movieAndAmounts.totalAmountDue}</em></p>\n`;
+  result += `<p>You earned <em>${movieAndAmounts.frequentRenterPoints}</em> frequent renter points</p>\n`;
+
+  return result;
+};
+
+
+const calculateMoviePrice = (customer: Customer, movies: MovieCollection): MoviesAndAmounts => {
+  let movieAndAmounts: MoviesAndAmounts = {
+    movies: {},
+    frequentRenterPoints: 0,
+    totalAmountDue: 0
+  };
+  for (const r of customer.rentals) {
     let movie = movies[r.movieID];
     let thisAmount = 0;
 
@@ -25,15 +63,10 @@ export const statement = (customer: any, movies: any): string => {
         }
         break;
     }
-
-    frequentRenterPoints++;
-    if (movie.code === MovieCode.NEW && r.days > 2) frequentRenterPoints++;
-
-    result += `\t${movie.title}\t${thisAmount}\n`;
-    totalAmount += thisAmount;
+    movieAndAmounts.movies[movie.title] = thisAmount;
+    movieAndAmounts.frequentRenterPoints++;
+    if (movie.code === MovieCode.NEW && r.days > 2) movieAndAmounts.frequentRenterPoints++;
+    movieAndAmounts.totalAmountDue += thisAmount;
   }
-  result += `Amount owed is ${totalAmount}\n`;
-  result += `You earned ${frequentRenterPoints} frequent renter points\n`;
-
-  return result;
+  return movieAndAmounts;
 };

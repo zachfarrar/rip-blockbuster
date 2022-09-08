@@ -1,5 +1,7 @@
+import { MovieId } from "./Movie";
+
 export interface Rental {
-  movieId: string;
+  movieID: MovieId;
   days: number;
 }
 
