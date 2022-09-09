@@ -1,0 +1,26 @@
+{
+  "regular": {
+    "startingPrice": 2,
+    "rentalDays": 2,
+    "overdueMultiplier": 1.5,
+    "daysForPoints": null,
+    "pointsPerDay": 1,
+    "bonusPoints": 0
+  },
+  "childrens": {
+    "startingPrice": 1.5,
+    "rentalDays": 3,
+    "overdueMultiplier": 1.5,
+    "daysForPoints": null,
+    "pointsPerDay": 1,
+    "bonusPoints": 0
+  },
+  "new": {
+    "startingPrice": 0,
+    "rentalDays": 0,
+    "overdueMultiplier": 3,
+    "daysForPoints": 2,
+    "pointsPerDay": 1,
+    "bonusPoints": 1
+  }
+}
