@@ -7,7 +7,7 @@ type MoviesAndAmounts = {
   totalAmountDue: number;
 };
 
-const db = require('./data/data-store.json');
+const db = require('../data/data-store.json');
 
 export const statement = (customer: Customer, movies: MovieCollection): string => {
   let result = `Rental Record for ${customer.name}\n`;

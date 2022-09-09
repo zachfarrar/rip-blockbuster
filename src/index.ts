@@ -9,8 +9,8 @@ import { htmlStatement, statement } from "./statement";
 const program: Command = new Command();
 const version: string = require("../package.json").version;
 
-const customer: Customer = require("./data/customer.json");
-const movies: MovieCollection = require("./data/movies.json");
+const customer: Customer = require("../data/customer.json");
+const movies: MovieCollection = require("../data/movies.json");
 
 program
   .version(version)
@@ -20,6 +20,7 @@ program
   .command("statement")
   .description("Prints out a plain-text statement for the customer")
   .option("-h, --html", 'flag that determines whether to output in html or plaintext')
+  .option("-d, --data", "flag for running the data update CLI")
   .action((options) => {
     const printString = options.html ? htmlStatement(customer, movies) : statement(customer, movies);
     console.log(printString);
