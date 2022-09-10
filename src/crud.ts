@@ -75,17 +75,17 @@ export const cliTool = async () => {
     } else {
       if (input === 'create') {
         const data = getAllInputs();
-        createCategory(data.name, data.startingPrice, data.rentalDays, data.overdueMultiplier, data.pointsPerDay, data.daysForPoints, data.bonusPoints);
+        console.log(createCategory(data.name, data.startingPrice, data.rentalDays, data.overdueMultiplier, data.pointsPerDay, data.daysForPoints, data.bonusPoints));
       }
       else if (input === 'read') {
-        readCategory(getNameInput(true));
+        console.log(readCategory(getNameInput(true)));
       }
       else if (input === 'update') {
         const data = getAllInputs();
-        updateCategory(data.name, data.startingPrice, data.rentalDays, data.overdueMultiplier, data.pointsPerDay, data.daysForPoints, data.bonusPoints);
+        console.log(updateCategory(data.name, data.startingPrice, data.rentalDays, data.overdueMultiplier, data.pointsPerDay, data.daysForPoints, data.bonusPoints));
       }
       else if (input === 'delete') {
-        deleteCategory(getNameInput(false));
+        console.log(deleteCategory(getNameInput(false)));
       }
     }
     input = cli('What would you like to do? Valid options are "create", "read", "update", and "delete". Type "exit" to quit. ');

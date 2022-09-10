@@ -1,7 +1,7 @@
 {
   "name": "video-store",
   "version": "1.0.0",
-  "description": "",
+  "description": "The movie rental service that will put Blockbuster out of business",
   "main": "./build/index.js",
   "bin": {
     "video-store": "./build/index.js"
