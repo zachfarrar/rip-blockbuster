@@ -23,8 +23,7 @@
     "cli": "ts-node src/cli.ts cli",
     "statement": "ts-node src/index.ts statement",
     "statement:watch": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts statement",
-    "html-statement": "ts-node src/index.ts statement -h",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "html-statement": "ts-node src/index.ts statement -h"
   },
   "author": "Zach Farrar",
   "license": "ISC"
