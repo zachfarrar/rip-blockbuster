@@ -8,12 +8,12 @@ let db = require(pathToDb);
 
 export const createCategory = (name: string, startingPrice: number = 0, rentalDays: number = 0, overdueMultiplier: number = 0, pointsPerDay: number = 0, daysForPoints: number | null = null, bonusPoints: number = 0) => {
   db[name] = {
-    startingPrice: +startingPrice,
-    rentalDays: +rentalDays,
-    overdueMultiplier: +overdueMultiplier,
-    pointsPerDay: +pointsPerDay,
+    startingPrice: isNaN(+startingPrice) ? 0 : +startingPrice,
+    rentalDays: isNaN(+rentalDays) ? 0 : +rentalDays,
+    overdueMultiplier: isNaN(+overdueMultiplier) ? 0 : +overdueMultiplier,
+    pointsPerDay: isNaN(+pointsPerDay) ? 0 : +pointsPerDay,
     daysForPoints: daysForPoints ? +daysForPoints : null,
-    bonusPoints: +bonusPoints
+    bonusPoints: isNaN(+bonusPoints) ? 0 : +bonusPoints
   };
 
   fs.writeFileSync(pathToDb, JSON.stringify(db));
@@ -28,14 +28,14 @@ export const readCategory = (name: string) => {
 export const updateCategory = (name: string, startingPrice: number = 0, rentalDays: number = 0, overdueMultiplier: number = 0, pointsPerDay: number = 0, daysForPoints: number | null, bonusPoints: number) => {
   let category = db[name];
   if (!category) {
-    throw new Error('No matching category in the database! Please create the category first.');
+    return 'No matching category in the database! Please create the category first.';
   }
-  category.startingPrice = +startingPrice;
-  category.rentalDays = +rentalDays;
-  category.overdueMultiplier = +overdueMultiplier;
-  category.pointsPerDay = +pointsPerDay;
+  category.startingPrice = isNaN(+startingPrice) ? 0 : +startingPrice;
+  category.rentalDays = isNaN(+rentalDays) ? 0 : +rentalDays;
+  category.overdueMultiplier = isNaN(+overdueMultiplier) ? 0 : +overdueMultiplier;
+  category.pointsPerDay = isNaN(+pointsPerDay) ? 0 : +pointsPerDay;
   category.daysForPoints = daysForPoints ? +daysForPoints : null;
-  category.bonusPoints = +bonusPoints;
+  category.bonusPoints = isNaN(+bonusPoints) ? 0 : +bonusPoints;
 
   db[name] = category;
   fs.writeFileSync(pathToDb, JSON.stringify(db));
