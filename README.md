@@ -54,3 +54,30 @@ You earned 4 frequent renter points
 2. Include a rough estimate of how much time you spent working on the assignment.
 3. Also include any additional instructions / requirements for running your solution.
 4. Finally, please feel free - though you're not required - to provide some "documentation" to justify any tradeoffs you might have made when writing the code and what implications those tradeoffs may have in the future - especially for the second "task" above.
+
+## How To Run
+
+To generate a plain text statement, run `npm run statement`.
+To generate a HTML statement, run `npm run html-statement`.
+To modify movie categories, run `npm run cli`. The CLI will prompt you to type "create", "read", "update", or "delete" depending on what you want to do to the data.
+
+- create will take you through a prompt that will add a brand new movie category
+- read will return the specified movie category or undefined
+- update will update an existing movie category
+- delete will delete an existing movie category
+
+To exit the CLI, you must type exit.
+
+The CLI for updating data may also be run with flags if you only want to run a single command. The flags are
+
+- -c or --create with optional arguments for each data point
+- -r or --read
+- -u or --update with optional arguments for each data point
+- -d or --delete
+
+To use these commands, edit the package.json. You must add flags to the cli command.
+i.e. `ts-node src/cli.ts cli --read regular`
+
+## Time To Complete
+
+I spent about 5 hours writing this solution.
