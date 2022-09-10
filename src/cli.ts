@@ -23,13 +23,13 @@ program
   .argument("[bonusPoints]")
   .action((startingPrice, rentalDays, overdueMultiplier, pointsPerDay, daysForPoints, bonusPoints, options) => {
     if (options.create) {
-      createCategory(options.add, startingPrice, rentalDays, overdueMultiplier, pointsPerDay, daysForPoints, bonusPoints);
+      console.log(createCategory(options.add, startingPrice, rentalDays, overdueMultiplier, pointsPerDay, daysForPoints, bonusPoints));
     } else if (options.read) {
-      readCategory(options.read);
+      console.log(readCategory(options.read));
     } else if (options.update) {
-      updateCategory(options.update, startingPrice, rentalDays, overdueMultiplier, pointsPerDay, daysForPoints, bonusPoints);
+      console.log(updateCategory(options.update, startingPrice, rentalDays, overdueMultiplier, pointsPerDay, daysForPoints, bonusPoints));
     } else if (options.delete) {
-      deleteCategory(options.delete);
+      console.log(deleteCategory(options.delete));
     } else {
       cliTool();
     }

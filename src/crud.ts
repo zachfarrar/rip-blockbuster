@@ -17,10 +17,12 @@ export const createCategory = (name: string, startingPrice: number = 0, rentalDa
   };
 
   fs.writeFileSync(pathToDb, JSON.stringify(db));
+
+  return db[name];
 };
 
 export const readCategory = (name: string) => {
-  console.log(db[name]);
+  return db[name];
 };
 
 export const updateCategory = (name: string, startingPrice: number = 0, rentalDays: number = 0, overdueMultiplier: number = 0, pointsPerDay: number = 0, daysForPoints: number | null, bonusPoints: number) => {
@@ -37,12 +39,17 @@ export const updateCategory = (name: string, startingPrice: number = 0, rentalDa
 
   db[name] = category;
   fs.writeFileSync(pathToDb, JSON.stringify(db));
+
+  return db[name];
 };
 
 export const deleteCategory = (name: string) => {
+  const category = db[name];
   delete db[name];
 
   fs.writeFileSync(pathToDb, JSON.stringify(db));
+
+  return category;
 };
 
 export const cliTool = async () => {
